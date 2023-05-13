@@ -34,7 +34,9 @@ class TicketController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $ticket = Ticket::find($id);
+        $ticket = new TicketResource($ticket);
+        return response()->json(['show ticket success'=>true, 'data'=>$ticket], 201);
     }
 
     /**
