@@ -16,10 +16,8 @@ class TicketController extends Controller
     {
         $tickets = Ticket::all();
         $tickets = TicketResource::collection($tickets); 
-        return response()->json(['Get tickets scucces'=>true, 'data'=>$tickets],200);  
-
+        return response()->json(['Get tickets scucces'=>true, 'data'=>$tickets],200); 
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -36,15 +34,15 @@ class TicketController extends Controller
     {
         $ticket = Ticket::find($id);
         $ticket = new TicketResource($ticket);
-        return response()->json(['show ticket success'=>true, 'data'=>$ticket], 201);
+        return response()->json(['show one ticket success'=>true, 'data'=>$ticket], 201);
     }
-
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $ticket = Ticket::store($request, $id);
+        return response()->json(['Update ticket success'=>true, 'data'=>$ticket], 201);
     }
 
     /**
@@ -52,6 +50,8 @@ class TicketController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $ticket= Ticket::find($id);
+        $ticket->delete();
+        return response()->json(['Delete ticket success'=>true, 'data'=>$ticket], 201);
     }
 }

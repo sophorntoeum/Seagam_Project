@@ -16,10 +16,13 @@ class EventResource extends JsonResource
     {
         return[
             'id'=>$this->id,
+            'date'=>$this->date,
             'name'=>$this->name,
             'description'=>$this->description,
             'stadium'=>$this->stadium,
             'create_by_id'=>$this->user_id,
+            'ticket'=>$this->tickets,
+            
         ];
     }
 }
