@@ -13,11 +13,12 @@ class Ticket extends Model
     protected $fillable = [
         'zone',
         'price',
+        'date',
         'event_id',
         'user_id',
     ];
     public static function store($request, $id=null){
-        $ticket = $request->only(['zone', 'price', 'event_id','user_id']);
+        $ticket = $request->only(['zone', 'price','date', 'event_id','user_id']);
         $ticket = self::updateOrCreate(['id' => $id], $ticket);
         return $ticket;
     }

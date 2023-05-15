@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('zone');
             $table->string('price');
-
+            $table->dateTime('date');
             $table->unsignedBigInteger('event_id')->unsigned();
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
 

@@ -28,7 +28,9 @@ class StoreTeamRequest extends FormRequest
                 'min:5',
                 'max:15',
                 Rule::unique('users')->ignore($this->id),
+            'country' => 'required',
             ],
+            'gender' => 'required',
             'country' => 'required',
             'memberOfTeam' => 'required',
         ];

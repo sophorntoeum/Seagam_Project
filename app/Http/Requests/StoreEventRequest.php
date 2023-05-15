@@ -36,7 +36,8 @@ class StoreEventRequest extends FormRequest
                 'max:15',
                 Rule::unique('users')->ignore($this->id),
             ],
-            'date' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
             'description' => 'required',
             'stadium' => 'required',
         ];

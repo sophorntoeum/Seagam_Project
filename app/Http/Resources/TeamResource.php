@@ -17,6 +17,7 @@ class TeamResource extends JsonResource
         return[
             'id'=>$this->id,
             'name'=>$this->name,
+            'gender'=>$this->gender,
             'country'=>$this->country,
             'memberOfTeam'=>$this->memberOfTeam,
             'create_by_id'=>$this->user_id,

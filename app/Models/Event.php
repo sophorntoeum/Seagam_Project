@@ -13,17 +13,26 @@ class Event extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'date',
+        'start_date',
+        'end_date',
         'description',
         'stadium',
         'user_id',
     ];
 
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'event_teams')->withTimestamps();
+    }
     public static function store($request, $id=null){
-        $event = $request->only(['name', 'date', 'description','stadium', 'user_id']);
+        $event = $request->only(['name', 'start_date','end_date', 'description','stadium', 'user_id']);
         $event = self::updateOrCreate(['id' => $id], $event);
+        $teams = request('teams');
+        // dd($teams);
+        $event->teams()->sync($teams);
         return $event;
     }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

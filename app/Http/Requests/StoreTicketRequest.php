@@ -25,6 +25,7 @@ class StoreTicketRequest extends FormRequest
         return [
             'zone' => 'required',
             'price' => 'required',
+            'date' => 'required',
         ];
     }
 }
