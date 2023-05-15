@@ -14,4 +14,9 @@ class Team extends Model
         'memberOfTeam',
         'user_id',
     ];
+    public static function store($request, $id=null){
+        $team = $request->only(['name', 'country', 'memberOfTeam', 'user_id']);
+        $team = self::updateOrCreate(['id' => $id], $team);
+        return $team;  
+    }
 }

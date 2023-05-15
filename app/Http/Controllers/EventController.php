@@ -16,6 +16,8 @@ class EventController extends Controller
     public function index()
     {
        $event = Event::all();
+       $name = request('name');
+       $event = Event::where('name','like','%'.$name.'%')->get();
        $event = EventResource::collection($event);
         return response()->json(['Get all event success'=>true, 'data'=>$event], 200);
     }
