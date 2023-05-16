@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,20 +17,16 @@ class UserController extends Controller
     {
         $user = User::all();
         $user= UserResource::collection(($user));
-        return response()->json(['scucces'=>true, 'data'=>$user],201);  
+        return response()->json(['User create scucces'=>true, 'data'=>$user],201);  
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $user = User::create([
-            'name' => request('name'),
-            'email' => request('email'),
-            'password'=>Hash::make($request->password),
-        ]);
-        return response()->json(['scucces'=>true, 'data'=>$user],201);
+        $user = User::store($request);
+        return response()->json(['User create success'=>true, 'data'=>$user], 201);
     }
 
     /**
@@ -47,13 +44,8 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = User::find($id);
-        $user->update ([
-            'name'=>$request->input('name'),
-            'email'=>$request->input('email'),
-            'password'=>$request->input('password'),
-        ]);
-        return response()->json(['scucces'=>true, 'data'=>$user],200);
+        $user = User::store($request, $id);
+        return response()->json(['Update user success'=>true, 'data'=>$user], 201);
     }
 
     /**

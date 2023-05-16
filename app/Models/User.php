@@ -20,9 +20,17 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'gender',
         'email',
         'password',
+        'phoneNumber',
     ];
+
+    public static function store($request, $id=null){
+        $user = $request->only(['name','gender','email','password','phoneNumber']);
+        $user = self::updateOrCreate(['id' => $id], $user);
+        return $user;  
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -51,6 +59,11 @@ class User extends Authenticatable
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function teams(): HasMany
+    {
+        return $this->hasMany(Team::class);
     }
     
 }

@@ -14,6 +14,15 @@ class ShowTicketResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return[
+            'id'=>$this->id,
+            'zone'=>$this->zone,
+            'price'=>$this->price,
+            'date'=>$this->date,
+            'description'=>$this->description,
+            'stadium'=>$this->stadium,
+            'create_by_id'=>$this->user,
+            // 'ticket'=>$this->tickets,  
+        ];
     }
 }

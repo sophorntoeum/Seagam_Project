@@ -22,7 +22,7 @@ class EventResource extends JsonResource
             'description'=>$this->description,
             'stadium'=>$this->stadium,
             'create_by_id'=>$this->user_id,
-            'ticket'=>$this->tickets,  
+            // 'ticket'=>$this->tickets,  
         ];
     }
 }

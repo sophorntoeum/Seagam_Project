@@ -28,7 +28,7 @@ class Event extends Model
         $event = $request->only(['name', 'start_date','end_date', 'description','stadium', 'user_id']);
         $event = self::updateOrCreate(['id' => $id], $event);
         $teams = request('teams');
-        // dd($teams);
+        
         $event->teams()->sync($teams);
         return $event;
     }
@@ -42,4 +42,5 @@ class Event extends Model
     {
         return $this->hasMany(Ticket::class);
     }
+    
 }

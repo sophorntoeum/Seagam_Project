@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
@@ -15,6 +18,10 @@ class StoreUserRequest extends FormRequest
         return true;
     }
 
+    protected function failedValidation(ValidationValidator $validator)
+    {
+        throw new HttpResponseException(response()->json(['success' => false, 'message' => $validator->errors()], 412));
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -29,8 +36,14 @@ class StoreUserRequest extends FormRequest
                 'max:10',
                 Rule::unique('users')->ignore($this->id),
             ],
-            'email' => 'required',
+            'email' => [
+                'required',
+                Rule::unique('users')->ignore($this->id),
+            ],
+            'gender' => 'required',
+            // 'email' => 'required',
             'password' => 'required',
+            'phoneNumber' => 'required',
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Resources\EventResource;
+use App\Http\Resources\ShowEventResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Event;
@@ -16,8 +17,6 @@ class EventController extends Controller
     public function index()
     {
        $event = Event::all();
-       $name = request('name');
-       $event = Event::where('name','like','%'.$name.'%')->get();
        $event = EventResource::collection($event);
         return response()->json(['Get all event success'=>true, 'data'=>$event], 200);
     }
@@ -55,5 +54,12 @@ class EventController extends Controller
         $event= Event::find($id);
         $event->delete();
         return response()->json(['Delete event success'=>true, 'data'=>$event], 201);
+    }
+
+    public function eventSearch($name)
+    {
+       $event = Event::where('name','like','%'.$name.'%')->get();
+       $event = ShowEventResource::collection($event);
+        return response()->json(['Get all event success'=>true, 'data'=>$event], 200);
     }
 }

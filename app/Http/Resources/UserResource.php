@@ -17,8 +17,12 @@ class UserResource extends JsonResource
         return[
             'id'=>$this->id,
             'name'=>$this->name,
+            'gender'=>$this->gender,
             'email'=>$this->email,
-            'events'=>EventResource::collection($this->events),         
+            'password'=>$this->password,
+            'phoneNumber'=>$this->phoneNumber,
+            'events'=>EventResource::collection($this->events),    
+            'teams'=>$this->teams,      
         ];
     }
 }

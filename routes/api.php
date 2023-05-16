@@ -57,3 +57,6 @@ Route::post('/eventTeams',[EventTeamController::class, 'store']);
 Route::get('/eventTeams/{id}',[EventTeamController::class, 'show']);
 Route::put('/eventTeams/{id}',[EventTeamController::class, 'update']);
 Route::delete('/eventTeams/{id}',[EventTeamController::class, 'destroy']);
+
+//API Event_Search
+Route::get('/eventSearch/{name}',[EventController::class, 'eventSearch']);
