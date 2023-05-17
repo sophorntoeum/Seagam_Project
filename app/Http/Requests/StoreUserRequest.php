@@ -41,7 +41,6 @@ class StoreUserRequest extends FormRequest
                 Rule::unique('users')->ignore($this->id),
             ],
             'gender' => 'required',
-            // 'email' => 'required',
             'password' => 'required',
             'phoneNumber' => 'required',
         ];

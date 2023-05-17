@@ -22,7 +22,8 @@ class UserResource extends JsonResource
             'password'=>$this->password,
             'phoneNumber'=>$this->phoneNumber,
             'events'=>EventResource::collection($this->events),    
-            'teams'=>$this->teams,      
+            'teams'=>$this->teams,    
+            
         ];
     }
 }
